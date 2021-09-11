@@ -41,7 +41,7 @@ namespace App.Api.Controllers
                 Nome = nome,
                 DataNascimento = dataNascimento,
                 Peso = peso,
-                Ativo = ativo
+                Ativo = ativo,
                 CidadeId = IdCidade
             };
             _service.Salvar(obj);
