@@ -23,29 +23,29 @@ namespace App.Application.Services
             return obj;
         }
 
-        
-        
+
+
         public List<Pessoa> listaPessoas(string nome, int pesoMaiorQue, int pesoMenorQue)
         {
             nome = nome ?? "";
-            return (List<Pessoa>)_repository.Query(x => 1 == 1);
-            x.Nome.ToUpper().Contains(nome.ToUpper()) && 
-                (pesoMaiorQue == 0 || x.Peso >= pesoMaiorQue)
-             (pesoMenorQue == 0 || x.Peso <= pesoMenorQue);
+            return (List<Pessoa>)_repository.Query(x =>
+            x.Nome.ToUpper().Contains(nome.ToUpper()) &&
+            (pesoMaiorQue == 0 || x.Peso >= pesoMaiorQue) &&
+             (pesoMenorQue == 0 || x.Peso <= pesoMenorQue)
                 ).Select(p => new Pessoa
 
-                  {
+                {
 
-                      Id = p.Id,
-                      Nome = p.Nome,
-                      Peso = p.Peso,
-                      Cidade = new Cidade
-                      {
-                          Nome = p.Cidade.Nome
-                      }
-                  }) ;.ToList();
+                    Id = p.Id,
+                    Nome = p.Nome,
+                    Peso = p.Peso,
+                    Cidade = new Cidade
+                    {
+                        Nome = p.Cidade.Nome
+                    }
+                }).ToList();
         }
-        
+
 
         private void Salvar1(Pessoa obj)
         {
@@ -58,12 +58,12 @@ namespace App.Application.Services
 
         }
 
-         void IPessoaService.Salvar(Pessoa obj)
+        void IPessoaService.Salvar(Pessoa obj)
         {
             throw new NotImplementedException();
         }
 
-      
+
 
         public void Remover(Guid id)
         {
