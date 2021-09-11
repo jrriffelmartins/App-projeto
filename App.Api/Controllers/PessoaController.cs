@@ -1,5 +1,6 @@
 ﻿using App.Domain.Entities;
 using App.Domain.Interfaces.Application;
+using Cidades;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -20,10 +21,38 @@ namespace App.Api.Controllers
             _service = service;
         }
 
-        [HttpGet]
-        public JsonResult Get()
+        [HttpGet("ListaPessoas")]
+        public JsonResult ListaPessoas()
         {
-            return Json(new {lista = _service.listaPessoas() });
+            return Json(_service.listaPessoas());
+
+        }
+        [HttpGet("BuscaPorId")]
+
+        public JsonResult BuscaPorId(Guid id)
+        {
+            return Json(_service.BuscaPorId(id));
+        }
+        [HttpPost("Salvar")]
+        public JsonResult Salvar(string nome, int peso, DateTime dataNascimento, bool ativo, Guid IdCidade)
+        {
+            var obj = new Pessoa
+            {
+                Nome = nome,
+                DataNascimento = dataNascimento,
+                Peso = peso,
+                Ativo = ativo
+                CidadeId = IdCidade
+            };
+            _service.Salvar(obj);
+            return Json(true);
+        }
+
+        [HttpPost("Remover")]
+        public JsonResult Salvar(Guid id)
+        {
+            _service.Remover(id);
+            return Json(true);
         }
     }
 }

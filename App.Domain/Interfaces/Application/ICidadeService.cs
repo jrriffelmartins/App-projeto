@@ -1,18 +1,21 @@
-﻿using App.Domain.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Cidades;
 
 namespace App.Domain.Interfaces.Application
 {
-    public interface IPessoaService
+    public interface ICidadesService
     {
-        Pessoa BuscaPorId(Guid id);
-        List<Pessoa> listaPessoas();
-        void Salvar(Pessoa obj);
+        Cidade BuscaPorId(Guid id);
+        List<Cidade> listaCidades();
+        void Salvar(Cidade obj);
         void Remover(Guid id);
-
     }
+
+
+
+   
 }
